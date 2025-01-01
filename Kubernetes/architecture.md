@@ -1,5 +1,7 @@
 # Diagrama a implementar
 
+The architectura doesn't have to make sense at all, this project is only for learning purposes
+
 ![kubernetes](./images/TF_Kubernetes.png)
 
 For this project the cluster definition will be the following:
