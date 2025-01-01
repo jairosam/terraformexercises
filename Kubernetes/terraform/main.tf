@@ -20,3 +20,8 @@ provider "azurerm" {
 module "resource-groups" {
   source = "./resource-groups"
 }
+
+module "virtual-network" {
+  source  = "./networking"
+  rg-name = module.resource-groups.rg-networking-id
+}

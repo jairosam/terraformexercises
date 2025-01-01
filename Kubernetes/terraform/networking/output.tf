@@ -1,0 +1,3 @@
+output "vnet-id" {
+
+}
