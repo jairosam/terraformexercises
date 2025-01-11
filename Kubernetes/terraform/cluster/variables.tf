@@ -7,5 +7,5 @@ variable "vnet-cluster" {
 }
 
 variable "rg-aks-id" {
-    type = string
+  type = string
 }
