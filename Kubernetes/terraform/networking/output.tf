@@ -1,3 +1,0 @@
-output "vnet-id" {
-
-}
