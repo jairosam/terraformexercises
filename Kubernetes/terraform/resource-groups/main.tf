@@ -4,7 +4,7 @@ resource "azurerm_resource_group" "rg-networking" {
 }
 
 resource "azurerm_resource_group" "rg-aks" {
-  name     = "rg-vnets"
+  name     = "rg-aks"
   location = "eastus2"
 }
 

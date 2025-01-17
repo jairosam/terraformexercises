@@ -1,7 +1,7 @@
 resource "azurerm_virtual_network" "vnet-resource" {
   name                = "vnet-resources"
   location            = "eastus2"
-  resource_group_name = var.rg-name
+  resource_group_name = "${var.rg-name}"
   address_space       = ["10.10.0.0/16"]
 
   tags = {
@@ -11,28 +11,28 @@ resource "azurerm_virtual_network" "vnet-resource" {
 
 resource "azurerm_subnet" "subnet-vms" {
   name                 = "subnet-vms"
-  resource_group_name  = var.rg-name
+  resource_group_name  = "${var.rg-name}"
   virtual_network_name = azurerm_virtual_network.vnet-resource.name
   address_prefixes     = ["10.10.0.0/24"]
 }
 
 resource "azurerm_subnet" "subnet-aks" {
   name                 = "subnet-aks"
-  resource_group_name  = var.rg-name
+  resource_group_name  = "${var.rg-name}"
   virtual_network_name = azurerm_virtual_network.vnet-resource.name
   address_prefixes     = ["10.10.1.0/24"]
 }
 
 resource "azurerm_subnet" "subnet-app-gateway" {
   name                 = "subnet-app-gateway"
-  resource_group_name  = var.rg-name
+  resource_group_name  = "${var.rg-name}"
   virtual_network_name = azurerm_virtual_network.vnet-resource.name
   address_prefixes     = ["10.10.2.0/24"]
 }
 
 resource "azurerm_public_ip" "ip-app-gateway" {
   name                = "publicIP-gateway"
-  resource_group_name = var.rg-name
+  resource_group_name = "${var.rg-name}"
   location            = "eastus2"
   allocation_method   = "Static"
 }
@@ -40,7 +40,7 @@ resource "azurerm_public_ip" "ip-app-gateway" {
 resource "azurerm_application_gateway" "app-gateway-cluster" {
   
   name                = "app-gateway-cluster"
-  resource_group_name = var.rg-name
+  resource_group_name = "${var.rg-name}"
   location            = "eastus2"
 
   sku {
@@ -67,7 +67,8 @@ resource "azurerm_application_gateway" "app-gateway-cluster" {
   frontend_ip_configuration {
     name                          = "private-frontend-ip"
     subnet_id                     = azurerm_subnet.subnet-app-gateway.id
-    private_ip_address_allocation = "Dynamic"
+    private_ip_address_allocation = "Static"
+    private_ip_address = "10.10.2.20"
   }
 
   backend_address_pool {
@@ -86,7 +87,7 @@ resource "azurerm_application_gateway" "app-gateway-cluster" {
   http_listener {
     name                           = "http-listener-cluster"
     frontend_ip_configuration_name = "public-frontend-ip"
-    frontend_port_name             = "frontend-port"
+    frontend_port_name             = "frontend_port"
     protocol                       = "Http"
   }
 

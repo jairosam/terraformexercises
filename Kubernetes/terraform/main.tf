@@ -25,3 +25,13 @@ module "virtual-network" {
   source  = "./networking"
   rg-name = module.resource-groups.rg-networking-id
 }
+
+module "aks-cluster" {
+  source = "./cluster"
+  snet-cluster = module.virtual-network.snet-cluster-id
+  rg-aks-id = module.resource-groups.rg-aks-id
+  vnet-id = module.virtual-network.vnet-id 
+  depends_on = [
+    module.virtual-network
+  ]
+}

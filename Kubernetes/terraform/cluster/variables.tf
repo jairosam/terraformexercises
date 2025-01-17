@@ -2,10 +2,10 @@ variable "snet-cluster" {
   type = string
 }
 
-variable "vnet-cluster" {
+variable "rg-aks-id" {
   type = string
 }
 
-variable "rg-aks-id" {
+variable "vnet-id" {
   type = string
 }
