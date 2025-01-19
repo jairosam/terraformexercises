@@ -1,14 +1,14 @@
 resource "azurerm_resource_group" "rg-networking" {
-  name     = "rg-vnets"
+  name     = var.rg-networking-name
   location = "eastus2"
 }
 
 resource "azurerm_resource_group" "rg-aks" {
-  name     = "rg-aks"
+  name     = var.rg-aks-name
   location = "eastus2"
 }
 
 resource "azurerm_resource_group" "rg-vms" {
-  name     = "rg-vms"
+  name     = var.rg-vms-name
   location = "eastus2"
 }

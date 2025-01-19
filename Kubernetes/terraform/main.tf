@@ -19,6 +19,9 @@ provider "azurerm" {
 
 module "resource-groups" {
   source = "./resource-groups"
+  rg-networking-name = var.rg-networking-name
+  rg-aks-name = var.rg-aks-name
+  rg-vms-name = var.rg-vms-name
 }
 
 module "virtual-network" {
