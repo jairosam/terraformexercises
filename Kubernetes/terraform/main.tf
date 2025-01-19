@@ -27,6 +27,10 @@ module "resource-groups" {
 module "virtual-network" {
   source  = "./networking"
   rg-name = module.resource-groups.rg-networking-id
+  address-space = var.address-space
+  subnet-vms-address = var.subnet-vms-address 
+  subnet-aks-address = var.subnet-aks-address
+  subnet-appgateway-address = var.subnet-appgateway-address 
 }
 
 module "aks-cluster" {
